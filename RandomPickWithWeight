@@ -1,0 +1,40 @@
+class Solution {
+    private int[] w_tot;
+    private int sum;
+    public Solution(int[] w) {
+        sum = 0;
+        w_tot = new int[w.length];
+        for(int i=0; i<w.length; i++) {
+            sum+= w[i];
+            w_tot[i] = sum;
+        }
+    }
+    
+    public int pickIndex() {
+        int index = (int) (Math.random() * sum);
+        return binarySearch(index + 1);
+        
+            
+    }
+    
+    private int binarySearch(int val) {
+        int left = 0;
+        int right = w_tot.length - 1;
+        while(left<right) {
+            int mid = (left + right)/2;
+            if(w_tot[mid] < val) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+    
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(w);
+ * int param_1 = obj.pickIndex();
+ */
